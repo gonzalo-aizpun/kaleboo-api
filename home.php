@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 include 'application/init.php';
 $Kaleboo = new Kaleboo();
 
@@ -10,5 +9,6 @@ $result['data']['filters'] = $Kaleboo->getFilters();
 
 $json = json_encode($result);
 
+header('Content-type: application/json');
 die($json);
 ?>
