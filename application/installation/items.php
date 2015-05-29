@@ -39,7 +39,7 @@ foreach ($states as $state)
 				$basePrice = rand(100, 200);	// usd
 				$ixFirstName = rand(0, count($names)-1);
 				$ixLastName = rand(0, count($names)-1);
-				$expensesPercent = rand(10, 20) / 100;
+				$expensesPercent = rand(12, 18) / 100;
 
 				$item['id_state'] = $state['id'];
 				$item['id_city'] = $city['id'];
