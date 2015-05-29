@@ -17,11 +17,10 @@ class Kaleboo
 		if (!empty($items)) {
 			return $items;
 		}
-		$query = '
-			SELECT * FROM items LIMIT 100
-		';
 
+		$query = $this->buildQuery($filters);
 		$items = $this->database->fetch_all_array($query);
+
 		foreach ($items as &$item) 
 		{
 			$item['state'] = $this->getState($item['id_state']);
@@ -46,6 +45,40 @@ class Kaleboo
 
 		$this->utf8_encode_deep($items);
 		return $items;
+	}
+
+	function buildQuery($filters)
+	{
+		if (empty($filters)) {
+			return 'SELECT * FROM items';
+		}
+
+		$query = 'SELECT * FROM items WHERE ';
+
+		// direct filters
+		$allowed = array('id_state', 'id_city', 'id_neighborhood', 'id_type', 'id_identity', 'id_furnished');
+		foreach ($filters as $key => $value) 
+		{
+			if (in_array($key, $allowed)) {
+				$query .= " $key = $value AND ";
+			}
+		}
+
+		// range filters
+		$allowed = array('min_price', 'min_rooms', 'min_expenses', 'min_surface','max_price', 'max_rooms', 'max_expenses', 'max_surface');
+		foreach ($filters as $key => $value) 
+		{
+			if (in_array($key, $allowed)) 
+			{
+				$symbol = strpos($key, 'min_') !== false ? '>=' : '<=';
+				$key = str_replace('min_', '', $key);
+				$key = str_replace('max_', '', $key);
+				$query .= " $key $symbol $value AND ";
+			}
+		}
+
+		$query .= " 1 LIMIT 1";
+		return $query;
 	}
 
 	function getLocationTree() 
@@ -88,6 +121,9 @@ class Kaleboo
 		
 		$data[5]['id'] = 'surface';
 		$data[5]['type'] = 'int';
+
+		$data[6]['id'] = 'expenses';
+		$data[6]['type'] = 'int';
 		
 		return $data;
 	}
