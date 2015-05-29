@@ -10,9 +10,42 @@ class Kaleboo
 		$this->cache = new Cache();
 	}
 
-	function getListing($filters) 
+	function getItems($filters) 
 	{
+		$key = md5(print_r($filters, true));
+		$items = $this->cache->get('items.' . $key);
+		if (!empty($items)) {
+			return $items;
+		}
+		$query = '
+			SELECT * FROM items LIMIT 100
+		';
 
+		$items = $this->database->fetch_all_array($query);
+		foreach ($items as &$item) 
+		{
+			$item['state'] = $this->getState($item['id_state']);
+			$item['city'] = $this->getCity($item['id_city']);
+			$item['neighborhood'] = $this->getNeighborhood($item['id_neighborhood']);
+			$item['type'] = $this->getType($item['id_type']);
+			$item['identity'] = $this->getIdentity($item['id_identity']);
+			$item['furnished'] = $this->getFurnish($item['id_furnished']);
+
+			unset($item['id_state']);
+			unset($item['id_city']);
+			unset($item['id_neighborhood']);
+			unset($item['id_type']);
+			unset($item['id_identity']);
+			unset($item['id_furnished']);
+			unset($item['state']['url']);
+			unset($item['city']['url']);
+			unset($item['city']['id_state']);
+			unset($item['neighborhood']['url']);
+			unset($item['neighborhood']['id_city']);
+		}
+
+		$this->utf8_encode_deep($items);
+		return $items;
 	}
 
 	function getLocationTree() 
@@ -59,40 +92,64 @@ class Kaleboo
 		return $data;
 	}
 
-	function getIdentities() 
-	{
-		$identities = $this->cache->get('identities');
-		if (!empty($identities)) {
-			return $identities;
-		}
-		$identities = $this->database->fetch_all_array('select * from identities');
-		$this->utf8_encode_deep($identities);
-		$this->cache->set('identities', $identities);
-		return $identities;
+	function getState($id) {
+		return $this->_getTableValuesById('states', $id);
 	}
 
-	function getTypes() 
-	{
-		$types = $this->cache->get('types');
-		if (!empty($types)) {
-			return $types;
-		}
-		$types = $this->database->fetch_all_array('select * from types');
-		$this->utf8_encode_deep($types);
-		$this->cache->set('types', $types);
-		return $types;
+	function getCity($id) {
+		return $this->_getTableValuesById('cities', $id);
 	}
 
-	function getFurnished() 
+	function getNeighborhood($id) {
+		return $this->_getTableValuesById('neighborhoods', $id);
+	}
+
+	function getType($id) {
+		return $this->_getTableValuesById('types', $id);
+	}
+
+	function getFurnish($id) {
+		return $this->_getTableValuesById('furnished', $id);
+	}
+
+	function getIdentity($id) {
+		return $this->_getTableValuesById('identities', $id);
+	}
+
+	function getIdentities() {
+		return $this->_getTableValues('identities');
+	}
+
+	function getTypes() {
+		return $this->_getTableValues('types');
+	}
+
+	function getFurnished()  {
+		return $this->_getTableValues('furnished');
+	}
+
+	private function _getTableValuesById($tableName, $id) 
 	{
-		$furnished = $this->cache->get('furnished');
-		if (!empty($furnished)) {
-			return $furnished;
+		$data = $this->cache->get($tableName.$id);
+		if (!empty($data)) {
+			return $data;
 		}
-		$furnished = $this->database->fetch_all_array('select * from furnished');
-		$this->utf8_encode_deep($furnished);
-		$this->cache->set('furnished', $furnished);
-		return $furnished;
+		$data = $this->database->query_first('SELECT * FROM ' . $tableName . ' WHERE id=' . $id);
+		$this->utf8_encode_deep($data);
+		$this->cache->set($tableName.$id, $data);
+		return $data;
+	}
+
+	private function _getTableValues($tableName) 
+	{
+		$data = $this->cache->get($tableName);
+		if (!empty($data)) {
+			return $data;
+		}
+		$data = $this->database->fetch_all_array('SELECT * FROM ' . $tableName);
+		$this->utf8_encode_deep($data);
+		$this->cache->set($tableName, $data);
+		return $data;
 	}
 
 	function utf8_encode_deep(&$input) 
