@@ -1,5 +1,5 @@
 <?php
-include 'application/init.php';
+include '../application/init.php';
 $Kaleboo = new Kaleboo();
 
 $result['code'] = 0;
