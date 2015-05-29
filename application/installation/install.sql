@@ -7,6 +7,7 @@ CREATE TABLE `items` (
  `id_neighborhood` int(11) NOT NULL,
  `id_type` int(11) NOT NULL,
  `id_identity` int(11) NOT NULL,
+ `id_furnished` int(11) NOT NULL,
  `price` int(11) NOT NULL,
  `rooms` int(11) NOT NULL,
  `surface` int(11) NOT NULL,
@@ -14,6 +15,40 @@ CREATE TABLE `items` (
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE `furnished`;
+
+CREATE TABLE `furnished` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `description` varchar(64) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `furnished` VALUES (null, 'Sin Amoblar');
+INSERT INTO `furnished` VALUES (null, 'Amoblado');
+
+
+DROP TABLE `identities`;
+
+CREATE TABLE `identities` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `description` varchar(64) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `identities` VALUES (null, 'Dueño Directo');
+INSERT INTO `identities` VALUES (null, 'Inmobiliaria');
+
+DROP TABLE `types`;
+
+CREATE TABLE `types` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `description` varchar(64) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `types` VALUES (null, 'Apartamentos');
+INSERT INTO `types` VALUES (null, 'Casas');
+INSERT INTO `types` VALUES (null, 'Otros');
 
 DROP TABLE `states`;
 

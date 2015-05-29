@@ -29,7 +29,70 @@ class Kaleboo
 			}
 		}
 		$this->utf8_encode_deep($states);
+		$this->cache->set('location', $states);
 		return $states;
+	}
+
+	function getFilters() 
+	{
+		$data[0]['id'] = 'id_identity';
+		$data[0]['type'] = 'combo';
+		$data[0]['values'] = $this->getIdentities();
+
+		$data[1]['id'] = 'id_type';
+		$data[1]['type'] = 'combo';
+		$data[1]['values'] = $this->getTypes();
+
+		$data[2]['id'] = 'id_furnished';
+		$data[2]['type'] = 'combo';
+		$data[2]['values'] = $this->getFurnished();
+
+		$data[3]['id'] = 'price';
+		$data[3]['type'] = 'int';
+		
+		$data[4]['id'] = 'rooms';
+		$data[4]['type'] = 'int';
+		
+		$data[5]['id'] = 'surface';
+		$data[5]['type'] = 'int';
+		
+		return $data;
+	}
+
+	function getIdentities() 
+	{
+		$identities = $this->cache->get('identities');
+		if (!empty($identities)) {
+			return $identities;
+		}
+		$identities = $this->database->fetch_all_array('select * from identities');
+		$this->utf8_encode_deep($identities);
+		$this->cache->set('identities', $identities);
+		return $identities;
+	}
+
+	function getTypes() 
+	{
+		$types = $this->cache->get('types');
+		if (!empty($types)) {
+			return $types;
+		}
+		$types = $this->database->fetch_all_array('select * from types');
+		$this->utf8_encode_deep($types);
+		$this->cache->set('types', $types);
+		return $types;
+	}
+
+	function getFurnished() 
+	{
+		$furnished = $this->cache->get('furnished');
+		if (!empty($furnished)) {
+			return $furnished;
+		}
+		$furnished = $this->database->fetch_all_array('select * from furnished');
+		$this->utf8_encode_deep($furnished);
+		$this->cache->set('furnished', $furnished);
+		return $furnished;
 	}
 
 	function utf8_encode_deep(&$input) 

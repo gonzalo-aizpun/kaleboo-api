@@ -5,7 +5,8 @@ $Kaleboo = new Kaleboo();
 
 $result['code'] = 0;
 $result['message'] = 'Service OK';
-$result['data']['locations'] = $Kaleboo->getLocationTree();
+$result['data']['states'] = $Kaleboo->getLocationTree();
+$result['data']['filters'] = $Kaleboo->getFilters();
 
 $json = json_encode($result);
 
