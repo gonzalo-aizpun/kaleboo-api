@@ -50,7 +50,7 @@ class Kaleboo
 	function buildQuery($filters)
 	{
 		if (empty($filters)) {
-			return 'SELECT * FROM items';
+			return 'SELECT * FROM items LIMIT 100';
 		}
 
 		$query = 'SELECT * FROM items WHERE ';
