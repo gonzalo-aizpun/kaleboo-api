@@ -77,7 +77,7 @@ class Kaleboo
 			}
 		}
 
-		$query .= " 1 LIMIT 1";
+		$query .= " 1 LIMIT 100";
 		return $query;
 	}
 
