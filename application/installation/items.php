@@ -32,7 +32,7 @@ foreach ($states as $state)
 		echo "> {$state['description']}.{$city['description']}\n";
 		foreach ($city['neighborhoods'] as $neighborhood) 
 		{
-			$qty = rand(10, 200);
+			$qty = rand(30, 300);
 			for($i=0; $i<$qty; $i++) 
 			{
 				$areaPerRoom = rand(9, 18);
