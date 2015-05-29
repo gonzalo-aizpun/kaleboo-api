@@ -45,6 +45,7 @@ class Kaleboo
 		}
 
 		$this->utf8_encode_deep($items);
+		$items = $this->cache->set('items.' . $key, $items);
 		return $items;
 	}
 
