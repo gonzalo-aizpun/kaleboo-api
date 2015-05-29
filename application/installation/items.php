@@ -39,6 +39,7 @@ foreach ($states as $state)
 				$basePrice = rand(100, 200);	// usd
 				$ixFirstName = rand(0, count($names)-1);
 				$ixLastName = rand(0, count($names)-1);
+				$expensesPercent = rand(10, 20) / 100;
 
 				$item['id_state'] = $state['id'];
 				$item['id_city'] = $city['id'];
@@ -49,6 +50,7 @@ foreach ($states as $state)
 				$item['rooms'] = rand(1, $maxRooms);
 				$item['surface'] = $areaPerRoom * $item['rooms'];
 				$item['price'] = round($basePrice * $item['rooms'] * $colombiaCurrency, -3);
+				$item['expenses'] = round($item['price'] * $expensesPercent), -2);
 				$item['email'] = strtolower($names[$ixFirstName].'.'.$names[$ixLastName].'@gmail.com');
 
 				$Database->query_insert('items', $item);

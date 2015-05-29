@@ -9,6 +9,7 @@ CREATE TABLE `items` (
  `id_identity` int(11) NOT NULL,
  `id_furnished` int(11) NOT NULL,
  `price` int(11) NOT NULL,
+ `expenses` int(11) NOT NULL,
  `rooms` int(11) NOT NULL,
  `surface` int(11) NOT NULL,
  `email` varchar(196) NOT NULL,
