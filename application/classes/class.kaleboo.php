@@ -29,6 +29,7 @@ class Kaleboo
 			$item['type'] = $this->getType($item['id_type']);
 			$item['identity'] = $this->getIdentity($item['id_identity']);
 			$item['furnished'] = $this->getFurnish($item['id_furnished']);
+			$item['images'] = $this->database->fetch_all_array('SELECT id, url FROM images WHERE id_item='.$item['id']);
 
 			unset($item['id_state']);
 			unset($item['id_city']);
