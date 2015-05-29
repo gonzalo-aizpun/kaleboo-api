@@ -67,7 +67,6 @@ INSERT INTO `states` VALUES (null, 'Santander', 'santander.olx.com.co');
 INSERT INTO `states` VALUES (null, 'Atlántico', 'atlantico.olx.com.co');
 INSERT INTO `states` VALUES (null, 'Cundinamarca', 'cundinamarca.olx.com.co');
 INSERT INTO `states` VALUES (null, 'Norte de Santander', 'nortedesantander.olx.com.co');
-INSERT INTO `states` VALUES (null, 'Risaralda', 'risaralda.olx.com.co');
 
 DROP TABLE `cities`;
 
@@ -101,10 +100,6 @@ INSERT INTO `cities` VALUES (null, 6, 'Chía', 'chia.olx.com.co');
 INSERT INTO `cities` VALUES (null, 6, 'Fusagasugá', 'fusagasuga.olx.com.co');
 
 INSERT INTO `cities` VALUES (null, 7, 'Cúcuta', 'cucuta.olx.com.co');
-
-INSERT INTO `cities` VALUES (null, 8, 'Pereira', 'pereira.olx.com.co');
-INSERT INTO `cities` VALUES (null, 8, 'Dosquebradas', 'dosquebradas.olx.com.co');
-
 
 DROP TABLE `neighborhoods`;
 
@@ -311,35 +306,3 @@ INSERT INTO `neighborhoods` VALUES (null, 16, 'Occidental');
 INSERT INTO `neighborhoods` VALUES (null, 16, 'Suroccidental');
 INSERT INTO `neighborhoods` VALUES (null, 16, 'Cementerio');
 
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Ferrocarril');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Olímpica');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'San Joaquín');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Cuba');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Del Café');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'El Oso');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Perla del Otún');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Consota');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'El Rocío');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'El Poblado');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'El Jardín');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'San Nicolás');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Centro');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Río Otún');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Boston');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Universidad');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Villavicencio');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Oriente');
-INSERT INTO `neighborhoods` VALUES (null, 17, 'Villasantana');
-
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 1');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 2');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 3');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 4');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 5');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 6');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 7');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 8');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 9');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 10');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 11');
-INSERT INTO `neighborhoods` VALUES (null, 18, 'Comuna 12');
