@@ -12,17 +12,17 @@ class Kaleboo
 
 	function getItems($filters) 
 	{
-		$key = md5(print_r($filters, true));
-		$items = $this->cache->get('items.' . $key);
-		if (!empty($items)) {
-			return $items;
-		}
-
 		$query = $this->buildQuery($filters);
 		$items = $this->database->fetch_all_array($query);
 
 		foreach ($items as &$item) 
 		{
+			$i = $this->cache->get('items.item.' . $item['id']);
+			if (!empty($i)) {
+				$item = $i;
+				continue;
+			}
+
 			$item['state'] = $this->getState($item['id_state']);
 			$item['city'] = $this->getCity($item['id_city']);
 			$item['neighborhood'] = $this->getNeighborhood($item['id_neighborhood']);
@@ -42,10 +42,11 @@ class Kaleboo
 			unset($item['city']['id_state']);
 			unset($item['neighborhood']['url']);
 			unset($item['neighborhood']['id_city']);
+
+			$this->utf8_encode_deep($item);
+			$this->cache->set('items.item.' . $item['id'], $item);
 		}
 
-		$this->utf8_encode_deep($items);
-		$items = $this->cache->set('items.' . $key, $items);
 		return $items;
 	}
 
